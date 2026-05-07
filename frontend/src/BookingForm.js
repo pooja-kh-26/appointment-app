@@ -74,7 +74,7 @@ function BookingForm() {
             };
 
             const res = await axios.post(
-                "http://localhost:5000/api/booking/create",
+                `${process.env.REACT_APP_API_URL}/api/booking/create`,
                 payload
             );
 
