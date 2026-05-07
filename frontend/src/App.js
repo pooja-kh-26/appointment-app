@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation } from "react-router-dom";
-import { CalendarHeart, LayoutDashboard, Moon, Sun } from "lucide-react";
+import { CalendarHeart, LayoutDashboard } from "lucide-react";
 import { useState, useEffect } from "react";
 import BookingForm from "./BookingForm";
 import DoctorDashboard from "./DoctorDashboard";

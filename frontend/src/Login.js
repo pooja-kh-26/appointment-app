@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Lock, Stethoscope, Eye, EyeOff } from "lucide-react";
+import axios from "axios";
 
 function Login() {
     const [password, setPassword] = useState("");
@@ -7,21 +8,30 @@ function Login() {
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         setError("");
         setLoading(true);
 
-        setTimeout(() => {
-            if (password.trim() === "admin123") {
+        try {
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+            const res = await axios.post(
+                `${process.env.REACT_APP_API_URL}/api/auth/login`,
+                { password }
+            );
+
+            if (res.data.success) {
                 localStorage.setItem("isDoctor", "true");
                 window.location.href = "/doctor";
-            } else {
-                setError("Incorrect password. Please try again.");
-                setPassword("");
             }
-            setLoading(false);
-        }, 800); // simulate API delay
+
+        } catch (err) {
+            setError("Incorrect password. Please try again.");
+            setPassword("");
+        }
+
+        setLoading(false);
     };
 
     return (

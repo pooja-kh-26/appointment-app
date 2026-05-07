@@ -98,7 +98,7 @@ function DoctorDashboard() {
     useEffect(() => {
         fetchBookings();
         fetchAllAvailability();
-    }, []);
+    }, [fetchAllAvailability, fetchBookings]);
 
     const handleLogout = () => {
         localStorage.removeItem("isDoctor");

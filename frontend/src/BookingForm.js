@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -28,24 +28,11 @@ function BookingForm() {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(null);
 
-    // // Fetch blocked dates
-    // const fetchDates = async () => {
-    //     try {
-    //         const res = await axios.get("http://localhost:5000/api/dates");
-    //         setBlockedDates(res.data.dates);
-    //     } catch (err) {
-    //         console.error("Error fetching dates", err);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     fetchDates();
-    // }, []);
 
     // Fetch slots
     const fetchSlots = async (date) => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/booking/create`);
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/booking/create`);
             setSlots(res.data.slots);
         } catch (err) {
             console.error("Error fetching slots", err);
@@ -73,7 +60,7 @@ function BookingForm() {
                 phone: `${form.countryCode} ${form.phone}`
             };
 
-            const res = await axios.post(
+            await axios.post(
                 `${process.env.REACT_APP_API_URL}/api/booking/create`,
                 payload
             );
