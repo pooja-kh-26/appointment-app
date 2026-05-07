@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------- ANIMATIONS ---------------- */
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.animate-shake {
+  animation: shake 0.3s ease;
+}
+
+/* ---------------- BASE ---------------- */
+@layer base {
+  body {
+    @apply antialiased transition-colors duration-300;
+
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+
+    /* MAIN WEBSITE BACKGROUND */
+    background-color: #eef2e6;
+
+    /* PRIMARY TEXT */
+    color: #344e41;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #a3b18a;
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #588157;
+  }
+}
+
+/* ---------------- COMPONENTS ---------------- */
+@layer components {
+
+  /* INPUT */
+  .input-field {
+    @apply w-full py-3 px-4 rounded-xl text-sm transition-all duration-200 focus:outline-none;
+
+    background-color: #fefae0;
+    border: 1px solid #d6dcc7;
+    color: #344e41;
+  }
+
+  .input-field:focus {
+    border-color: #588157;
+    box-shadow: 0 0 0 3px rgba(88, 129, 87, 0.12);
+  }
+
+  .input-field::placeholder {
+    color: #7a8b76;
+  }
+
+  /* BUTTON */
+  .btn-primary {
+    @apply w-full py-3 rounded-xl text-white font-medium transition-all duration-200;
+
+    background-color: #588157;
+  }
+
+  .btn-primary:hover {
+    background-color: #3a5a40;
+  }
+
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* CARD */
+  .card {
+    @apply rounded-2xl p-8 transition-all duration-300;
+
+    background-color: #fefae0;
+
+    border: 1px solid #dde5d3;
+
+    box-shadow:
+      0 4px 20px rgba(0, 0, 0, 0.03),
+      0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .card:hover {
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.05),
+      0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* ---------------- DATEPICKER ---------------- */
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  @apply input-field;
+}
+
+.react-datepicker {
+  background-color: #fefae0 !important;
+
+  border: 1px solid #d6dcc7 !important;
+
+  border-radius: 20px !important;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.05) !important;
+}
+
+.react-datepicker__header {
+  background-color: #ccd5ae !important;
+
+  border-bottom: 1px solid #d6dcc7 !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  color: #344e41 !important;
+
+  font-weight: 600;
+}
+
+.react-datepicker__day {
+  color: #344e41 !important;
+
+  border-radius: 10px !important;
+
+  transition: all 0.2s ease;
+}
+
+.react-datepicker__day:hover {
+  background-color: #d8e2c8 !important;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #588157 !important;
+
+  color: white !important;
+}
+
+.react-datepicker__day--disabled {
+  color: #b7b7b7 !important;
+}
