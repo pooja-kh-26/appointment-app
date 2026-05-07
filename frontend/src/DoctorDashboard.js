@@ -98,7 +98,7 @@ function DoctorDashboard() {
     useEffect(() => {
         fetchBookings();
         fetchAllAvailability();
-    }, [fetchAllAvailability, fetchBookings]);
+    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem("isDoctor");
@@ -132,9 +132,9 @@ function DoctorDashboard() {
                 </div>
 
                 <nav className="flex-1 px-4 space-y-2 mt-4">
-                    <a className="block px-4 py-3 bg-white/10 text-white rounded-xl font-medium shadow-sm border border-white/5 transition cursor-pointer">
+                    <button className="block w-full text-left px-4 py-3 bg-white/10 text-white rounded-xl font-medium shadow-sm border border-white/5 transition cursor-pointer">
                         Dashboard
-                    </a>
+                    </button>
                 </nav>
 
                 <div className="p-4">
