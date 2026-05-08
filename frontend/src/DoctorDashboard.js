@@ -270,7 +270,7 @@ function DoctorDashboard() {
                     <div className="space-y-8">
                         {/* AVAILABILITY FORM */}
                         <div className="card space-y-6 border-t-4 border-t-[#588157]">
-                            <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                            <h3 className="text-lg font-bold text-[#344e41] flex items-center gap-2">
                                 <CalendarPlus size={20} className="text-[#588157]" />
                                 Add Availability
                             </h3>
@@ -334,7 +334,7 @@ function DoctorDashboard() {
 
                         {/* CURRENT AVAILABILITY LIST */}
                         <div className="card space-y-6">
-                            <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                            <h3 className="text-lg font-bold text-[#344e41] flex items-center gap-2">
                                 <Clock size={20} className="text-[#588157]" />
                                 Upcoming Slots
                             </h3>
