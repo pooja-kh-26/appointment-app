@@ -296,7 +296,7 @@ function DoctorDashboard() {
                                                 const year = date.getFullYear();
                                                 const month = String(date.getMonth() + 1).padStart(2, '0');
                                                 const dayStr = String(date.getDate()).padStart(2, '0');
-                                                const formatted = `${year} - ${month} - ${dayStr}`;
+                                                const formatted = `${year}-${month}-${dayStr}`;
                                                 setDay(formatted);
                                             }}
                                             minDate={new Date()}
