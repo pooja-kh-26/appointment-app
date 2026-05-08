@@ -47,7 +47,7 @@ function DoctorDashboard() {
 
         setSaving(true);
         try {
-            await axios.post("http://localhost:5000/api/availability/set", {
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/availability/set`, {
                 day: day,
                 slots: slotArray
             });
@@ -68,7 +68,7 @@ function DoctorDashboard() {
     // ------------------ FETCH BOOKINGS ------------------
     const fetchBookings = async () => {
         try {
-            const res = await axios.get("http://localhost:5000/api/booking/all");
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/booking/all`);
             // Only keep upcoming bookings
             const upcoming = res.data.bookings.filter(b => b.date >= today);
             setBookings(upcoming);
@@ -82,7 +82,7 @@ function DoctorDashboard() {
     // ------------------ FETCH AVAILABILITY ------------------
     const fetchAllAvailability = async () => {
         try {
-            const res = await axios.get("http://localhost:5000/api/availability/all");
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/availability/all`);
             // Filter out empty slots and past dates
             const data = res.data.filter(d => d.slots && d.slots.length > 0 && d.day >= today);
 
@@ -98,6 +98,8 @@ function DoctorDashboard() {
     useEffect(() => {
         fetchBookings();
         fetchAllAvailability();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleLogout = () => {
@@ -294,7 +296,7 @@ function DoctorDashboard() {
                                                 const year = date.getFullYear();
                                                 const month = String(date.getMonth() + 1).padStart(2, '0');
                                                 const dayStr = String(date.getDate()).padStart(2, '0');
-                                                const formatted = `${year}-${month}-${dayStr}`;
+                                                const formatted = `${year} - ${month} - ${dayStr}`;
                                                 setDay(formatted);
                                             }}
                                             minDate={new Date()}
