@@ -32,8 +32,11 @@ function BookingForm() {
     // Fetch slots
     const fetchSlots = async (date) => {
         try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/booking/create`);
-            setSlots(res.data.slots);
+            const res = await axios.get(
+                `${process.env.REACT_APP_API_URL}/api/slots/${date}`
+            );
+
+            setSlots(res.data.slots || []);
         } catch (err) {
             console.error("Error fetching slots", err);
             setSlots([]);

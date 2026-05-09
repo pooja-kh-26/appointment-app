@@ -177,7 +177,7 @@ function DoctorDashboard() {
                     </div>
 
                     <div className="card !p-6 flex items-center gap-5 hover:-translate-y-1 transition-transform duration-300">
-                        <div className="p-4 bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 rounded-2xl">
+                        <div className="p-4 bg-[#d8e2c8] text-[#588157] rounded-2xl">
                             <CalendarPlus size={28} />
                         </div>
                         <div>
@@ -361,7 +361,7 @@ function DoctorDashboard() {
                                             <div key={index} className="p-4 border border-[#d8e2c8] rounded-xl bg-[#f8f8f2] hover:border-[#a3b18a] transition-colors">
                                                 <h4 className="text-sm font-bold text-slate-700 dark:text-slate-200 mb-3 flex items-center justify-between">
                                                     {item.day === today ? <span className="text-[#588157]">Today</span> : displayDate}
-                                                    <span className="text-xs font-medium bg-slate-200 dark:bg-slate-700 text-[#4f5d4f] px-2 py-0.5 rounded-full">{item.slots.length} slots</span>
+                                                    <span className="text-xs font-semibold bg-[#d8e2c8] text-[#344e41] px-2 py-0.5 rounded-full">{item.slots.length} slots</span>
                                                 </h4>
                                                 <div className="flex flex-wrap gap-2">
                                                     {item.slots.map((slot, i) => (
