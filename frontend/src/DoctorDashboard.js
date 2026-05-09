@@ -234,10 +234,9 @@ function DoctorDashboard() {
                                                 </div>
                                             </div>
 
-                                            <div className="sm:text-right flex flex-col justify-between sm:items-end bg-slate-50 dark:bg-slate-800/50 p-3 sm:p-0 sm:bg-transparent rounded-xl">
-                                                <div className="inline-flex items-center gap-1.5 text-sm font-semibold bg-[#eef3e6] text-[#3a5a40] px-3 py-1.5 rounded-lg border border-[#d8e2c8] shadow-sm">
-                                                    <Clock size={14} /> {b.date === today ? "Today" : b.date} at {b.time}
-                                                </div>
+                                            <div className="sm:text-right flex flex-col gap-3 sm:items-end">                    <div className="inline-flex items-center gap-1.5 text-sm font-semibold bg-[#eef3e6] text-[#3a5a40] px-3 py-1.5 rounded-lg border border-[#d8e2c8] shadow-sm">
+                                                <Clock size={14} /> {b.date === today ? "Today" : b.date} at {b.time}
+                                            </div>
 
                                                 {b.meetLink && (
                                                     <a

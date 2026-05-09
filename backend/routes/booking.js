@@ -5,11 +5,10 @@ const Booking = require("../models/Booking");
 const Availability = require("../models/Availability");
 const BlockedDate = require("../models/BlockedDate");
 
-
 // ✅ Create booking with validation
 router.post("/create", async (req, res) => {
     try {
-        const {
+        let {
             name,
             phone,
             email,
@@ -19,10 +18,16 @@ router.post("/create", async (req, res) => {
             time
         } = req.body;
 
+        // 🟢 Clean inputs (IMPORTANT)
+        phone = phone?.trim();
+        email = email?.trim();
+        time = time?.trim();
+        date = date?.trim();
+
         // 🟢 0. Validate mandatory fields
-        if (!phone || !email) {
+        if (!phone || !email || !date || !time) {
             return res.status(400).json({
-                message: "Phone number and email are required"
+                message: "Phone, email, date, and time are required"
             });
         }
 
@@ -35,7 +40,7 @@ router.post("/create", async (req, res) => {
             });
         }
 
-        // 🟢 3. Check blocked
+        // 🟢 2. Check blocked dates/slots
         const blocked = await BlockedDate.findOne({ date });
 
         if (blocked) {
@@ -52,7 +57,7 @@ router.post("/create", async (req, res) => {
             }
         }
 
-        // 🟢 4. Check already booked
+        // 🟢 3. Check already booked
         const existing = await Booking.findOne({ date, time });
 
         if (existing) {
@@ -61,8 +66,7 @@ router.post("/create", async (req, res) => {
             });
         }
 
-        // 🟢 5. Save booking
-        // 🟢 Save booking
+        // 🟢 4. Save booking
         const newBooking = new Booking({
             name,
             phone,
@@ -75,30 +79,47 @@ router.post("/create", async (req, res) => {
 
         await newBooking.save();
 
-        // 🟢 Push to Google Apps Script Webhook (if configured)
+        // 🟢 5. REMOVE SLOT FROM AVAILABILITY (CRITICAL FIX)
+        await Availability.updateOne(
+            { day: date },
+            { $pull: { slots: time } }
+        );
+
+        // 🟢 6. Google Sheets webhook (safe optional call)
         if (process.env.GOOGLE_SCRIPT_URL) {
             try {
                 await fetch(process.env.GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        name, age, gender, phone: `'${phone}`, email, date, time
+                        name,
+                        age,
+                        gender,
+                        phone: `'${phone}`,
+                        email,
+                        date,
+                        time
                     })
                 });
+
                 console.log("Successfully sent to Google Sheet Webhook");
             } catch (webhookErr) {
-                console.error("Webhook error:", webhookErr);
+                console.error("Webhook error:", webhookErr.message);
             }
         }
 
         // 🟢 Response
-        res.json({
+        return res.status(201).json({
             message: "Booking successful",
             booking: newBooking
         });
 
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error("Booking error:", error);
+        return res.status(500).json({
+            message: "Internal server error",
+            error: error.message
+        });
     }
 });
 
@@ -106,9 +127,15 @@ router.post("/create", async (req, res) => {
 router.get("/all", async (req, res) => {
     try {
         const bookings = await Booking.find().sort({ date: 1, time: 1 });
-        res.json({ bookings });
+
+        return res.json({ bookings });
+
     } catch (err) {
-        res.status(500).json({ message: "Error fetching bookings" });
+        return res.status(500).json({
+            message: "Error fetching bookings",
+            error: err.message
+        });
     }
 });
+
 module.exports = router;
