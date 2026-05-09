@@ -222,7 +222,7 @@ function DoctorDashboard() {
                                                     {b.name.charAt(0).toUpperCase()}
                                                 </div>
                                                 <div>
-                                                    <h4 className="text-lg font-bold text-[#344e41] group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                                    <h4 className="text-lg font-bold text-[#344e41]">
                                                         {b.name}
                                                     </h4>
                                                     <p className="text-sm text-[#6b705c] dark:text-[#7a8b76] mt-1">
@@ -361,7 +361,7 @@ function DoctorDashboard() {
                                             <div key={index} className="p-4 border border-[#d8e2c8] rounded-xl bg-[#f8f8f2] hover:border-[#a3b18a] transition-colors">
                                                 <h4 className="text-sm font-bold text-slate-700 dark:text-slate-200 mb-3 flex items-center justify-between">
                                                     {item.day === today ? <span className="text-[#588157]">Today</span> : displayDate}
-                                                    <span className="text-xs font-semibold bg-[#d8e2c8] text-[#344e41] px-2 py-0.5 rounded-full">{item.slots.length} slots</span>
+                                                    <span className="text-xs font-semibold bg-[#d8e2c8] text-[#344e41] px-2.5 py-1 rounded-full">{item.slots.length} slots</span>
                                                 </h4>
                                                 <div className="flex flex-wrap gap-2">
                                                     {item.slots.map((slot, i) => (

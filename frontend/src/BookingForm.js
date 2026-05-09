@@ -125,13 +125,31 @@ function BookingForm() {
                 <div className="lg:col-span-3 p-8 sm:p-12 bg-[#fefae0]">
                     {/* CONDITIONAL RENDER: SUCCESS vs FORM */}
                     {success ? (
-                        <div className="text-center p-8 mt-10 animate-in fade-in zoom-in duration-500">
-                            <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                                <CheckCircle2 size={40} />
+                        <div className="mt-6 bg-[#eef3e6] border border-[#ccd5ae] rounded-2xl p-6 flex items-start gap-4 shadow-sm animate-in fade-in zoom-in duration-500">
+
+                            <div className="p-3 rounded-full bg-[#d8e2c8] text-[#3a5a40] shrink-0">
+                                <CheckCircle2 size={26} />
                             </div>
-                            <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-4">
-                                Booking confirmed! Your appointment has been successfully booked.
-                            </h3>
+
+                            <div>
+                                <h3 className="text-xl font-bold text-[#344e41]">
+                                    Booking Confirmed!
+                                </h3>
+
+                                <p className="text-[#588157] mt-1 text-sm">
+                                    Your appointment has been successfully booked.
+                                </p>
+
+                                {form.date && form.time && (
+                                    <div className="mt-4 inline-flex items-center gap-2 bg-[#fefae0] border border-[#d8e2c8] text-[#344e41] px-4 py-2 rounded-xl text-sm font-semibold">
+                                        <Clock size={16} />
+                                        {form.date === new Date().toISOString().split("T")[0]
+                                            ? "Today"
+                                            : form.date
+                                        } at {form.time}
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     ) : (
                         <form onSubmit={handleSubmit} className="space-y-6">
