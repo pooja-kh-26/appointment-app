@@ -8,7 +8,11 @@ const bookingSchema = new mongoose.Schema({
     age: Number,
     date: String,
     time: String,
-    meetLink: String
+    meetLink: String,
+
+    meetingLink: {
+        type: String,
+    },
 });
 
 module.exports = mongoose.model("Booking", bookingSchema);

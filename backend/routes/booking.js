@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-
+const { v4: uuidv4 } = require("uuid");
+const sendEmail = require("../utils/sendEmail");
 const Booking = require("../models/Booking");
 const Availability = require("../models/Availability");
 const BlockedDate = require("../models/BlockedDate");
@@ -66,6 +67,10 @@ router.post("/create", async (req, res) => {
             });
         }
 
+        const roomName = `sutra-health-${uuidv4()}`;
+
+        const meetingLink = `https://meet.jit.si/${roomName}`;
+
         // 🟢 4. Save booking
         const newBooking = new Booking({
             name,
@@ -74,10 +79,49 @@ router.post("/create", async (req, res) => {
             gender,
             age,
             date,
-            time
+            time,
+            meetingLink
         });
 
         await newBooking.save();
+
+        // ✅ Send email to patient
+        await sendEmail(
+            email,
+            "Appointment Confirmed - Sutra Health",
+            `
+    <h2>Your appointment is confirmed</h2>
+
+    <p><strong>Name:</strong> ${name}</p>
+    <p><strong>Date:</strong> ${date}</p>
+    <p><strong>Time:</strong> ${time}</p>
+
+    <p>
+        <a href="${meetingLink}">
+            Join Video Consultation
+        </a>
+    </p>
+    `
+        );
+
+        // ✅ Send email to doctor
+        await sendEmail(
+            process.env.DOCTOR_EMAIL,
+            "New Appointment Booked",
+            `
+    <h2>New Appointment Booked</h2>
+
+    <p><strong>Patient:</strong> ${name}</p>
+    <p><strong>Date:</strong> ${date}</p>
+    <p><strong>Time:</strong> ${time}</p>
+
+    <p>
+        <a href="${meetingLink}">
+            Join Video Consultation
+        </a>
+    </p>
+    `
+        );
 
         // 🟢 5. REMOVE SLOT FROM AVAILABILITY (CRITICAL FIX)
         await Availability.updateOne(
@@ -111,7 +155,8 @@ router.post("/create", async (req, res) => {
         // 🟢 Response
         return res.status(201).json({
             message: "Booking successful",
-            booking: newBooking
+            booking: newBooking,
+            meetingLink
         });
 
     } catch (error) {
