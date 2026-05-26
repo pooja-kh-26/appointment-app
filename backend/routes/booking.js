@@ -86,7 +86,7 @@ router.post("/create", async (req, res) => {
         await newBooking.save();
 
         // ✅ Send email to patient
-        await sendEmail(
+        sendEmail(
             email,
             "Appointment Confirmed - Sutra Health",
             `
@@ -105,7 +105,7 @@ router.post("/create", async (req, res) => {
         );
 
         // ✅ Send email to doctor
-        await sendEmail(
+        sendEmail(
             process.env.DOCTOR_EMAIL,
             "New Appointment Booked",
             `
@@ -132,7 +132,7 @@ router.post("/create", async (req, res) => {
         // 🟢 6. Google Sheets webhook (safe optional call)
         if (process.env.GOOGLE_SCRIPT_URL) {
             try {
-                await fetch(process.env.GOOGLE_SCRIPT_URL, {
+                fetch(process.env.GOOGLE_SCRIPT_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
