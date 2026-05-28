@@ -78,8 +78,8 @@ function BookingForm() {
             const meetingLink = res.data.meetingLink;
 
             await emailjs.send(
-                "service_4u2we3h",
-                "template_l77wsio",
+                "service_rcoz3es",
+                "template_ayeqh7b",
                 {
                     to_name: form.name,
                     to_email: form.email,
@@ -88,12 +88,12 @@ function BookingForm() {
                     time: form.time,
                     meeting_link: meetingLink
                 },
-                "1-yvzaCcQtRFqsZaH"
+                "sNMA6vcboIYLiSOgq"
             );
 
             await emailjs.send(
-                "service_4u2we3h",
-                "template_955223d",
+                "service_rcoz3es",
+                "template_ayeqh7b",
                 {
                     to_email: "equal.society@gmail.com",
 
@@ -106,7 +106,7 @@ function BookingForm() {
 
                     meeting_link: meetingLink
                 },
-                "1-yvzaCcQtRFqsZaH"
+                "sNMA6vcboIYLiSOgq"
             );
 
             setSuccess(true);
