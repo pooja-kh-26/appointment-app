@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import emailjs from "@emailjs/browser";
+
 import {
     User,
     Phone,
@@ -63,9 +65,44 @@ function BookingForm() {
                 phone: `${form.countryCode} ${form.phone}`
             };
 
-            await axios.post(
+            // await axios.post(
+            //     `${process.env.REACT_APP_API_URL}/api/booking/create`,
+            //     payload
+            // );
+
+            const res = await axios.post(
                 `${process.env.REACT_APP_API_URL}/api/booking/create`,
                 payload
+            );
+
+            const meetingLink = res.data.meetingLink;
+
+            await emailjs.send(
+                "service_4u2we3h",
+                "template_l77wsio",
+                {
+                    to_name: form.name,
+                    to_email: form.email,
+                    email: form.email,
+                    date: form.date,
+                    time: form.time,
+                    meeting_link: meetingLink
+                },
+                "1-yvzaCcQtRFqsZaH"
+            );
+
+            await emailjs.send(
+                "service_4u2we3h",
+                "template_l77wsio",
+                {
+                    to_name: "Doctor",
+                    to_email: "doctor@gmail.com",
+                    email: form.email,
+                    date: form.date,
+                    time: form.time,
+                    meeting_link: meetingLink
+                },
+                "1-yvzaCcQtRFqsZaH"
             );
 
             setSuccess(true);
