@@ -4,13 +4,20 @@ const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
     secure: false,
+
     auth: {
         user: process.env.MEETING_EMAIL,
         pass: process.env.MEETING_EMAIL_PASSWORD,
     },
+
+    family: 4, // force IPv4
+
     tls: {
         rejectUnauthorized: false,
     },
+
+    dnsTimeout: 10000,
+    connectionTimeout: 10000,
 });
 
 const sendEmail = async (to, subject, html) => {
@@ -29,7 +36,6 @@ const sendEmail = async (to, subject, html) => {
 };
 
 module.exports = sendEmail;
-
 
 
 // const nodemailer = require("nodemailer");
