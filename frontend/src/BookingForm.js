@@ -93,13 +93,17 @@ function BookingForm() {
 
             await emailjs.send(
                 "service_4u2we3h",
-                "template_l77wsio",
+                "template_955223d",
                 {
-                    to_name: "Doctor",
-                    to_email: "doctor@gmail.com",
-                    email: form.email,
+                    to_email: "equal.society@gmail.com",
+
+                    patient_name: form.name,
+                    patient_email: form.email,
+                    patient_phone: `${form.countryCode} ${form.phone}`,
+
                     date: form.date,
                     time: form.time,
+
                     meeting_link: meetingLink
                 },
                 "1-yvzaCcQtRFqsZaH"
