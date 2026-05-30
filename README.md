@@ -1,6 +1,3 @@
-Here's a more professional, GitHub-quality README that looks like something you'd find in a production repository rather than a college project.
-
-# README.md
 
 ````markdown
 # 🏥 Sutra Health Appointment Scheduling Platform
