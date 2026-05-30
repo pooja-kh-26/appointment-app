@@ -6,7 +6,6 @@ A full-stack healthcare appointment management platform built using the MERN sta
 
 The platform enables patients to book appointments online while providing healthcare providers with an efficient system to manage availability, appointments, and virtual consultations.
 
----
 
 ## ✨ Key Features
 
@@ -37,7 +36,6 @@ The platform enables patients to book appointments online while providing health
 - Responsive UI for desktop and mobile devices
 - Cloud database integration
 
----
 
 ## 🚀 Live Workflow
 
