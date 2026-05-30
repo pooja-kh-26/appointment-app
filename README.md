@@ -41,7 +41,7 @@ The platform enables patients to book appointments online while providing health
 
 ### Appointment Booking Flow
 
-```text
+
 Patient Visits Website
           ↓
 Select Available Date
