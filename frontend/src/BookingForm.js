@@ -23,7 +23,7 @@ function BookingForm() {
         age: "",
         date: "",
         time: "",
-        countryCode: "+1"
+        countryCode: "+91"
     });
 
     const [slots, setSlots] = useState([]);
