@@ -219,9 +219,9 @@ function BookingForm() {
                                             onChange={handleChange}
                                             style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}
                                         >
+                                            <option value="+91">+91 (IN)</option>
                                             <option value="+1">+1 (US/CA)</option>
                                             <option value="+44">+44 (UK)</option>
-                                            <option value="+91">+91 (IN)</option>
                                             <option value="+61">+61 (AU)</option>
                                             <option value="+81">+81 (JP)</option>
                                             <option value="+49">+49 (DE)</option>
